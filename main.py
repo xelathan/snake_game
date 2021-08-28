@@ -147,16 +147,7 @@ class Game:
                 self.play_sound('./resources/1_snake_game_resources_crash.mp3')
                 raise 'Game Over'
 
-        if self.snake.x[0] < 0:
-            self.play_sound('./resources/1_snake_game_resources_crash.mp3')
-            raise 'Game Over'
-        if self.snake.x[0] > 1000:
-            self.play_sound('./resources/1_snake_game_resources_crash.mp3')
-            raise 'Game Over'
-        if self.snake.y[0] < 0:
-            self.play_sound('./resources/1_snake_game_resources_crash.mp3')
-            raise 'Game Over'
-        if self.snake.y[0] > 800:
+        if self.snake.x[0] < 0 or self.snake.x[0] > 1000 or self.snake.y[0] < 0 or self.snake.y[0] > 800:
             self.play_sound('./resources/1_snake_game_resources_crash.mp3')
             raise 'Game Over'
     
