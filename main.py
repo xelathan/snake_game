@@ -90,6 +90,7 @@ class Game:
         pygame.init()
         pygame.mixer.init()
         self.play_background_music()
+        self.GAME_SPEED = 0.3
 
         self.surface = pygame.display.set_mode((1000, 800))
         self.render_background()
@@ -121,6 +122,10 @@ class Game:
         bg = pygame.image.load('./resources/background.jpeg')
         self.surface.blit(bg, (0,0))
 
+    def speed_up_game(self):
+        if self.GAME_SPEED > 0.03:
+            self.GAME_SPEED -= 0.03
+
 
     def play(self):
         self.render_background()
@@ -132,6 +137,7 @@ class Game:
         #collision check when snake head hits apple
         if(self.is_collision(self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y)):
             self.play_sound('./resources/1_snake_game_resources_ding.mp3')
+            self.speed_up_game()
             self.snake.increase_length()
             self.apple.move()
         
@@ -140,6 +146,20 @@ class Game:
             if self.is_collision(self.snake.x[0], self.snake.y[0], self.snake.x[i], self.snake.y[i]):
                 self.play_sound('./resources/1_snake_game_resources_crash.mp3')
                 raise 'Game Over'
+
+        if self.snake.x[0] < 0:
+            self.play_sound('./resources/1_snake_game_resources_crash.mp3')
+            raise 'Game Over'
+        if self.snake.x[0] > 1000:
+            self.play_sound('./resources/1_snake_game_resources_crash.mp3')
+            raise 'Game Over'
+        if self.snake.y[0] < 0:
+            self.play_sound('./resources/1_snake_game_resources_crash.mp3')
+            raise 'Game Over'
+        if self.snake.y[0] > 800:
+            self.play_sound('./resources/1_snake_game_resources_crash.mp3')
+            raise 'Game Over'
+    
                 
 
     #create UI for score and place it in
@@ -200,7 +220,7 @@ class Game:
                 self.show_game_over()
                 pause = True
 
-            time.sleep(0.2)
+            time.sleep(self.GAME_SPEED)
             
 
        
