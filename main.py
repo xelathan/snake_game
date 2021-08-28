@@ -157,7 +157,7 @@ class Game:
     def display_score(self):
         font = pygame.font.SysFont('arial', 30)
         score = font.render(f"Score: {self.snake.length}", True, (255, 255, 255))
-        self.surface.blit(score, (800, 10))
+        self.surface.blit(score, (450, 10))
 
 
     def show_game_over(self):
